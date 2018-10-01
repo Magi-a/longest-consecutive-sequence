@@ -16,57 +16,62 @@ module.exports = function longestConsecutiveLength(array) {
 
   var maxLength = 0;
 
-  //var noFamily = 0;
+  var noFamily = 0;
 
 
-  for(let i = 0; i < array.length; i++){
+  while(array.length > 1){
 
-    var root = array[i];
+    var root = array[0];
 
-    if(root !== undefined){
-
-      var counter = 1;
-      var left = array[i];
-      var right = array[i];
-      var l = 0;
-      var r = 0;
+    
+    var counter = 1;
+    var left = array[0]-1;
+    var right = array[0]+1;
+    var l = 0;
+    var r = 0;
       
-      do {
+    do {
+      //console.log(array);
+
+      if(l>=0){
+        l = array.indexOf(left);
 
         if(l>=0){
-          l = array.indexOf(left-1);
-
-          if(l>=0){
-            left = array[l];
-            delete array[l];
-            counter++;
-          }
-          
+          left--;
+          array.splice(l, 1);
+          counter++;
         }
-        
-        if(r>=0){
-          r = array.indexOf(right+1);
-
-          if(r>=0){
-            right = array[r];
-            delete array[r];
-            counter++;
-          }
-        
           
-        }
-
-
-
-
-      } while(r>=0 || l>=0);
-
-      if(counter > maxLength){
-        maxLength = counter;
       }
-      
+        
+      if(r>=0){
+        r = array.indexOf(right);
+
+        if(r>=0){
+          right++;
+          array.splice(r, 1);
+          counter++;
+        }
+        
+          
+      }
+
+
+
+
+    } while(r>=0 || l>=0);
+
+    array.splice(0, 1);
+    
+
+    if(counter > maxLength){
+      maxLength = counter;
     }
+
+    
+      
   }
+  
 
 
   console.log('Max length - ' + maxLength);
