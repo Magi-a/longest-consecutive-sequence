@@ -16,9 +16,38 @@ module.exports = function longestConsecutiveLength(array) {
 
   var maxLength = 0;
 
-  var noFamily = 0;
+  /// version with sort
+  array.sort(function(a, b){
+    return a - b;
+  });
+
+  var arrayLength = array.length;
+
+  var counter = 1;
+
+  var max = 1;
+
+  var id = 0;
+
+  for(let i = 0; i < arrayLength; i++){
+
+    if((array[i]+1) === array[i+1]){
+      counter++;
+    } else {
+      if(counter > max){
+        max = counter;
+        id = i;
+      }
+      counter = 1;
+    }
+  }
+
+  //console.log("Max length - " + max);
+  //console.log("item i-1, i, i+1 - " + array[id-1] + ", " + array[id] + ", " + array[id+1]);
 
 
+
+/*
   while(array.length > 1){
 
     var root = array[0];
@@ -56,14 +85,10 @@ module.exports = function longestConsecutiveLength(array) {
           
       }
 
-
-
-
     } while(r>=0 || l>=0);
 
     array.splice(0, 1);
     
-
     if(counter > maxLength){
       maxLength = counter;
     }
@@ -72,8 +97,8 @@ module.exports = function longestConsecutiveLength(array) {
       
   }
   
-
-
   console.log('Max length - ' + maxLength);
-  return maxLength;
+  */
+  
+  return max;
 }
