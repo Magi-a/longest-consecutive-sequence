@@ -33,6 +33,9 @@ module.exports = function longestConsecutiveLength(array) {
 
     if((array[i]+1) === array[i+1]){
       counter++;
+    } else if((array[i]+1) === array[i+2]){
+      i++;
+      counter++;
     } else {
       if(counter > max){
         max = counter;
@@ -42,8 +45,10 @@ module.exports = function longestConsecutiveLength(array) {
     }
   }
 
-  //console.log("Max length - " + max);
-  //console.log("item i-1, i, i+1 - " + array[id-1] + ", " + array[id] + ", " + array[id+1]);
+
+
+  console.log("Max length - " + max);
+  console.log("item i-1, i, i+1 - " + array[id-1] + ", " + array[id] + ", " + array[id+1]);
 
 
 
